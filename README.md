@@ -1,50 +1,121 @@
-# Sentechtipsvn
+<p align="center">
+  <img src="CydiaIcon.png" width="80" height="80" alt="Sentechtipsvn">
+</p>
 
-Nguồn Sileo nơi khơi nguồn đam mê
+<h1 align="center">Sentechtipsvn</h1>
 
-Kho tweak và mã nguồn của **© Sentechtipsvn**. Website và địa chỉ nguồn Sileo chính thức:
+<p align="center">
+  <strong>Nguồn Sileo — Nơi khơi nguồn đam mê.</strong>
+</p>
+
+<p align="center">
+  <a href="https://sentechtipsvn.github.io/">Website & thêm nguồn</a>
+  ·
+  <a href="projects/">Mã nguồn</a>
+  ·
+  <a href="https://github.com/Sentechtipsvn/Sentechtipsvn.github.io/issues">Báo lỗi & đề xuất</a>
+</p>
+
+---
+
+Nguồn phân phối tweak chính thức của **Sentechtipsvn**, tập trung vào cử chỉ điều hướng, điều khiển nhanh và các tiện ích phục vụ nhu cầu sử dụng iPhone hằng ngày.
+
+Kho lưu trữ bao gồm gói cài đặt, mã nguồn, tài liệu sử dụng và lịch sử phiên bản của các dự án.
+
+## Thêm nguồn
+
+**Địa chỉ nguồn chính thức:**
 
 ```text
 https://sentechtipsvn.github.io/
 ```
 
-Mở địa chỉ trên để xem trang và chọn **Thêm vào Sileo**, hoặc dán trực tiếp vào **Sileo → Nguồn → +**. Cùng một địa chỉ phục vụ cả trang web và chỉ mục APT, không có tên repo lặp phía sau.
+### Qua website
 
-## Tweak hiện có
+Truy cập [sentechtipsvn.github.io](https://sentechtipsvn.github.io/) trên iPhone và chọn **Thêm vào Sileo**.
 
-| Tweak | Bản hiện tại | Chức năng | Trạng thái |
-| --- | --- | --- | --- |
-| [SenSwipe](projects/SenSwipe/README.md) | `0.1.0~beta1` | Cử chỉ Home, tùy chọn Control Center/Home bar | Đã có phản hồi cử chỉ chạy mượt; vẫn là beta |
-| [ShareWifi](projects/ShareWifi/README.md) | `0.2.0~beta1` | Bật chia sẻ mạng một chạm, ba chế độ dừng và Control Center | Bản 0.1.1 đã chạy được, module CC 0.2.0 đã hiển thị; các chế độ mới cần thử thêm |
-| [QuickControl](projects/QuickControl/README.md) | `0.1.0~beta1` | Khay tiện ích nổi, ứng dụng/URL/phím tắt, QR offline | Chưa xác nhận chạy trên iPhone thật |
+### Thêm thủ công
 
-Các gói hiện dành riêng **iPhone 7 Plus · iOS 15.8.8 · Dopamine rootless (`iphoneos-arm64`)**. Respring sau khi cài/nâng cấp. Phụ thuộc bên thứ ba lấy từ nguồn tác giả tương ứng, ví dụ [CCSupport của opa334](https://opa334.github.io/).
+1. Mở **Sileo → Nguồn → +**.
+2. Dán địa chỉ nguồn ở trên và xác nhận.
+3. Chờ Sileo tải danh sách gói.
+4. Chọn tweak cần cài đặt và thực hiện **Respring** khi được yêu cầu.
 
-Các .deb giữ nguyên byte, ID, version và phụ thuộc so với bản đã bàn giao. Việc chuyển nguồn không yêu cầu cài lại các tweak đã có. Chỉ cần thêm nguồn mới và bỏ nguồn cũ khỏi danh sách nếu muốn tránh hiển thị trùng.
+Các bản cập nhật tiếp theo được phân phối qua địa chỉ nguồn này.
 
-## Chuyển từ kho cũ
+## Các tweak
 
-[Kho Sentechtipsvn-tweak](https://github.com/Sentechtipsvn/Sentechtipsvn-tweak) và nguồn raw cũ vẫn được giữ làm bản lưu trong giai đoạn chuyển. Nguồn mới là `https://sentechtipsvn.github.io/` — hostname viết thường và không có đường dẫn tên repo nên tránh lỗi hoa/thường từng gặp ở Pages của kho cũ.
+| Tweak | Phiên bản | Giới thiệu |
+| --- | --- | --- |
+| [SenSwipe](projects/SenSwipe/README.md) | `0.1.0~beta1` | Cử chỉ Home và đa nhiệm kiểu iPhone X, tùy chọn Control Center và thanh Home. |
+| [ShareWifi](projects/ShareWifi/README.md) | `0.2.0~beta1` | Điều khiển chia sẻ mạng một chạm, các chế độ dừng và module Control Center. |
+| [QuickControl](projects/QuickControl/README.md) | `0.1.0~beta1` | Khay tiện ích nổi để mở ứng dụng, URL, phím tắt và tạo QR offline. |
 
-Repo này nhận các cập nhật tiếp theo của nguồn. Nguồn cũ không tự đồng bộ với repo mới; nếu đang theo dõi nguồn cũ thì thêm nguồn chính thức mới để nhận cập nhật về sau.
+Xem tài liệu của từng dự án để biết tính năng, cách cấu hình, phụ thuộc và những giới hạn hiện tại.
 
-## Cấu trúc
+## Tương thích
 
-- `index.html`, `Release`, `Packages*`, `CydiaIcon.png`: website và chỉ mục APT đặt ngay tại thư mục gốc, cùng nơi GitHub Pages phục vụ.
-- `debs/`: ba gói hiện tại. `Packages`, bản nén gzip/bzip2/xz và `Release` được sinh từ chính dữ liệu .deb.
-- `depictions/`: giới thiệu native trong Sileo. Trang web giữ giao diện gọn; chi tiết kiểm thử nằm trong Sileo và hướng dẫn từng dự án.
-- `projects/`: mã nguồn, hướng dẫn và bộ kiểm tra của từng tweak.
-- `sources/`: ZIP mã nguồn của các bản đang phân phối.
-- `archive/`: các bản ShareWifi 0.1.0/0.1.1 và ZIP nguồn để lưu lịch sử.
-- `catalog.json`: mô tả, version, changelog và trạng thái kiểm thử của ba tweak.
-- `scripts/`: bộ tạo nguồn và các kiểm tra APT/Sileo.
-- `.github/workflows/publish.yml`: kiểm tra dữ liệu đã commit bằng parser Sileo và APT. GitHub Pages tự triển khai nhánh master; không chạy thêm workflow deploy cạnh tranh với Pages.
+Các gói hiện được phát triển cho cấu hình sau:
 
-## Cập nhật gói
+| Thành phần | Yêu cầu |
+| --- | --- |
+| Thiết bị | iPhone 7 Plus |
+| Hệ điều hành | iOS 15.8.8 |
+| Jailbreak | Dopamine — rootless |
+| Kiến trúc gói | `iphoneos-arm64` |
+| Trình quản lý gói | Sileo |
 
-1. Build tweak với version mới; giữ bản cũ trong `archive/` nếu cần. Không thay byte một .deb đã phát hành mà vẫn giữ nguyên version.
-2. Cập nhật `projects/`, ZIP trong `sources/`, .deb trong `debs/` và thông tin tương ứng ở `catalog.json`.
-3. Chạy:
+Các phiên bản hiện tại đang ở giai đoạn **beta**. Khả năng tương thích với thiết bị, phiên bản iOS hoặc môi trường jailbreak khác chưa được xác nhận.
+
+QuickControl hiện chưa được kiểm chứng trên thiết bị thực. Thông tin kiểm thử chi tiết được ghi trong tài liệu của từng tweak.
+
+Một số tính năng Control Center cần [CCSupport](https://opa334.github.io/) từ nguồn của opa334. Kiểm tra mục phụ thuộc của gói trước khi cài đặt.
+
+## Tải xuống và mã nguồn
+
+- **Cài đặt, cập nhật:** sử dụng nguồn Sileo chính thức.
+- **Gói `.deb`:** xem thư mục [debs](debs/).
+- **Mã nguồn dự án:** xem thư mục [projects](projects/).
+- **Mã nguồn theo phiên bản phát hành:** xem thư mục [sources](sources/).
+- **Các phiên bản được lưu trữ:** xem thư mục [archive](archive/).
+
+Thông tin phiên bản và thay đổi của các gói được quản lý trong [catalog.json](catalog.json).
+
+## Báo lỗi và đóng góp
+
+Gửi báo lỗi hoặc đề xuất tính năng tại [GitHub Issues](https://github.com/Sentechtipsvn/Sentechtipsvn.github.io/issues).
+
+Một báo lỗi nên có:
+
+- Tên và phiên bản tweak.
+- Thiết bị, phiên bản iOS và jailbreak.
+- Các bước tái hiện lỗi.
+- Kết quả mong đợi và hiện tượng thực tế.
+- Ảnh chụp, video hoặc crash log nếu có.
+
+Vui lòng loại bỏ thông tin cá nhân khỏi nội dung và tệp đính kèm trước khi đăng công khai.
+
+Các đóng góp về mã nguồn, tài liệu và khả năng tương thích đều được hoan nghênh qua Pull Request.
+
+## Dành cho nhà phát triển
+
+### Cấu trúc kho
+
+| Đường dẫn | Nội dung |
+| --- | --- |
+| `debs/` | Gói cài đặt đang được phân phối |
+| `depictions/` | Trang giới thiệu gói trong Sileo |
+| `projects/` | Mã nguồn và tài liệu từng tweak |
+| `sources/` | Bản ZIP mã nguồn theo phiên bản |
+| `archive/` | Các phiên bản được lưu trữ |
+| `scripts/` | Công cụ tạo và kiểm tra nguồn |
+| `tests/` | Bộ kiểm thử và thành phần kiểm thử bên thứ ba |
+| `catalog.json` | Danh mục gói, phiên bản và lịch sử thay đổi |
+| `Packages*`, `Release` | Chỉ mục và metadata APT |
+
+### Tạo và kiểm tra chỉ mục
+
+Môi trường công cụ sử dụng Python 3 và `dpkg-scanpackages`. Các kiểm tra bổ sung cần Clang hỗ trợ Blocks và bộ công cụ APT.
 
 ```sh
 python3 scripts/build_repo.py
@@ -53,26 +124,26 @@ python3 scripts/verify_sileo.py
 bash scripts/verify_apt.sh
 ```
 
-4. Commit dữ liệu mới cùng chỉ mục đã sinh, rồi push. GitHub Pages triển khai thư mục gốc của nhánh master. Workflow kiểm tra dữ liệu đã commit; kiểm tra URL công khai sau khi Pages triển khai xong.
+Khi phát hành bản mới, cập nhật gói cài đặt, mã nguồn và thông tin trong `catalog.json`, sau đó tạo lại chỉ mục và chạy bộ kiểm tra.
 
-Công cụ tạo nguồn cần Python 3 và `dpkg-scanpackages` (`dpkg-dev` trên Debian/Ubuntu). Kiểm tra parser C cần clang hỗ trợ Blocks; thử đọc APT cần apt-get/apt-cache. Mỗi tweak có môi trường build riêng trong README của dự án.
+Mỗi bản phát hành phải có phiên bản riêng. Không thay thế nội dung một gói đã phát hành mà giữ nguyên số phiên bản.
 
-## Cấu hình Pages một lần
+Hướng dẫn build từng tweak nằm trong README của dự án tương ứng.
 
-Repo có tên đặc biệt `Sentechtipsvn.github.io`, thuộc tài khoản `Sentechtipsvn`. Cấu hình hiện dùng trong **Settings → Pages**: **Deploy from a branch → master → / (root)**. Giữ cấu hình này; dữ liệu nguồn đã nằm ngay tại gốc và có `.nojekyll`.
+## Giấy phép
 
-Địa chỉ là `https://sentechtipsvn.github.io/`. Tách kiểm tra dữ liệu khỏi việc triển khai của Pages để tránh hai workflow ghi đè lẫn nhau. Workflow kiểm tra xanh chưa thay cho kiểm tra HTTP của website, Release, Packages và các gói tải xuống.
+Mã nguồn do Sentechtipsvn phát triển được phân phối theo [MIT License](LICENSE).
 
-## Kiểm tra tương thích nguồn
+Các thành phần bên thứ ba giữ nguyên giấy phép và thông tin bản quyền tương ứng.
 
-Release có `Origin`, `Architectures: iphoneos-arm64` và **`Components: main`**. Trường Components là bắt buộc trong bộ đọc nguồn Sileo 2.5.1, kể cả nguồn flat; thiếu nó từng khiến Sileo hiện kho không tên và 0 gói dù HTTP trả 200.
+Bộ kiểm thử nguồn có sử dụng mã của Sileo Team:
 
-Các kiểm tra gồm: checksum .deb/Release, chỉ mục nén, metadata, URL thêm/sao chép nguồn, parser C của Sileo 2.5.1 và APT đọc chỉ mục trong thư mục tạm. Bài kiểm tra parser tái hiện lỗi thiếu Components và xác nhận dữ liệu đầy đủ được chấp nhận. Chúng không thay thế thử iOS trên máy thật.
+> This product includes software developed by the Sileo Team.
 
-Nguồn chưa có chữ ký GPG Release. Chữ ký ad-hoc của binary và checksum .deb không phải chứng chỉ Apple hay bảo đảm tương thích mọi thiết bị.
+Xem [giấy phép thành phần Sileo](tests/vendor/sileo-2.5.1/LICENSE).
 
-### Mã kiểm thử bên thứ ba
+---
 
-`tests/vendor/sileo-2.5.1/` giữ parser C và giấy phép gốc. Driver/header tương thích Linux chỉ dùng cho kiểm thử, không đưa vào các tweak. This product includes software developed by the Sileo Team. Xem [giấy phép](tests/vendor/sileo-2.5.1/LICENSE). Đây không phải chứng nhận hoặc sự bảo trợ của Sileo.
-
-© Sentechtipsvn · MIT cho mã riêng; giấy phép khác được ghi trong thư mục tương ứng.
+<p align="center">
+  © 2026 Sentechtipsvn
+</p>
