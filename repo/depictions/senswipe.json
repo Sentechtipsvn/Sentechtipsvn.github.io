@@ -1,0 +1,69 @@
+{
+  "class": "DepictionTabView",
+  "minVersion": "0.4",
+  "tintColor": "#168A61",
+  "tabs": [
+    {
+      "class": "DepictionStackView",
+      "tabname": "Giới thiệu",
+      "views": [
+        {
+          "class": "DepictionHeaderView",
+          "title": "SenSwipe"
+        },
+        {
+          "class": "DepictionMarkdownView",
+          "markdown": "Cử chỉ Home kiểu iPhone X, giữ nhận diện và bố cục bàn phím gốc.\n\n- Vuốt về Home và mở đa nhiệm bằng cơ chế native.\n- Tùy chọn Control Center góc phải và thanh Home.\n- Giới hạn can thiệp vào SpringBoard."
+        },
+        {
+          "class": "DepictionTableTextView",
+          "title": "Phiên bản",
+          "text": "0.1.0~beta1"
+        },
+        {
+          "class": "DepictionTableTextView",
+          "title": "Thiết bị",
+          "text": "iPhone 7 Plus"
+        },
+        {
+          "class": "DepictionTableTextView",
+          "title": "Hệ điều hành",
+          "text": "iOS 15.8.8"
+        },
+        {
+          "class": "DepictionTableTextView",
+          "title": "Môi trường",
+          "text": "Dopamine rootless · arm64"
+        },
+        {
+          "class": "DepictionSubheaderView",
+          "title": "Trạng thái beta"
+        },
+        {
+          "class": "DepictionMarkdownView",
+          "markdown": "Đã có phản hồi cử chỉ chạy mượt trên iPhone 7 Plus của tác giả. Các tình huống khác vẫn cần kiểm thử.\n\nRespring sau khi cài. Không dành cho iPhone chưa jailbreak."
+        },
+        {
+          "class": "DepictionTableButtonView",
+          "title": "Hướng dẫn và mã nguồn",
+          "action": "https://github.com/Sentechtipsvn/Sentechtipsvn.github.io/blob/master/projects/SenSwipe/README.md",
+          "openExternal": 1
+        }
+      ]
+    },
+    {
+      "class": "DepictionStackView",
+      "tabname": "Thay đổi",
+      "views": [
+        {
+          "class": "DepictionHeaderView",
+          "title": "0.1.0~beta1"
+        },
+        {
+          "class": "DepictionMarkdownView",
+          "markdown": "- Bản beta đầu: cử chỉ Home, tùy chọn Control Center và Home bar."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+name: Publish Sileo repository
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Build and validate Sileo source
+        run: |
+          python3 scripts/build_repo.py
+          python3 scripts/verify_repo.py
+          python3 scripts/verify_sileo.py
+          bash scripts/verify_apt.sh
+      - name: Configure Pages
+        id: pages
+        uses: actions/configure-pages@v5
+      - name: Validate root address
+        env:
+          PAGES_BASE_URL: ${{ steps.pages.outputs.base_url }}
+        run: |
+          python3 - <<'PY'
+          import os
+          expected = 'https://sentechtipsvn.github.io/'
+          actual = os.environ['PAGES_BASE_URL'].rstrip('/') + '/'
+          if actual != expected:
+              raise SystemExit('Unexpected Pages address: ' + actual)
+          PY
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: repo
+      - name: Deploy Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

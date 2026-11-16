@@ -1,0 +1,39 @@
+{
+  "package": "SenSwipe-0.1.0-beta1-iphoneos-arm64.deb",
+  "sha256": "f2c269d338c9b0314038d4ac84b4eef8fdd5d19a14d8465df10474b10f703d79",
+  "payload_files": 7,
+  "binaries": {
+    "tweak": {
+      "architecture": "arm64",
+      "minimum_ios": "15.0",
+      "verified_code_directories": 1,
+      "dependencies": [
+        "/System/Library/Frameworks/Foundation.framework/Foundation",
+        "/usr/lib/libobjc.A.dylib",
+        "@rpath/CydiaSubstrate.framework/CydiaSubstrate",
+        "/usr/lib/libSystem.B.dylib",
+        "/System/Library/Frameworks/CoreFoundation.framework/CoreFoundation"
+      ],
+      "rpaths": [
+        "/var/jb/Library/Frameworks",
+        "@loader_path/.jbroot/Library/Frameworks"
+      ]
+    },
+    "preferences": {
+      "architecture": "arm64",
+      "minimum_ios": "15.0",
+      "verified_code_directories": 1,
+      "dependencies": [
+        "/System/Library/Frameworks/Foundation.framework/Foundation",
+        "/System/Library/Frameworks/UIKit.framework/UIKit",
+        "/System/Library/PrivateFrameworks/Preferences.framework/Preferences",
+        "/usr/lib/libobjc.A.dylib",
+        "/usr/lib/libSystem.B.dylib",
+        "/System/Library/Frameworks/CoreFoundation.framework/CoreFoundation"
+      ],
+      "rpaths": []
+    }
+  },
+  "device_tested": false,
+  "runtime_gestures_and_layout": "Requires physical iPhone 7 Plus on iOS 15.8.8"
+}

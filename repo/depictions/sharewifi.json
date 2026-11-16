@@ -1,0 +1,69 @@
+{
+  "class": "DepictionTabView",
+  "minVersion": "0.4",
+  "tintColor": "#168A61",
+  "tabs": [
+    {
+      "class": "DepictionStackView",
+      "tabname": "Giới thiệu",
+      "views": [
+        {
+          "class": "DepictionHeaderView",
+          "title": "ShareWifi"
+        },
+        {
+          "class": "DepictionMarkdownView",
+          "markdown": "Bật chia sẻ mạng một chạm, xem máy khách và điều khiển từ Control Center.\n\n- Bật dữ liệu di động, Wi-Fi, Bluetooth và hotspot cùng một thao tác.\n- Ba cách dừng: tắt cả bộ, chỉ hotspot, khôi phục trước phiên.\n- Đọc số kết nối hệ thống, danh sách ARP và tên riêng thiết bị."
+        },
+        {
+          "class": "DepictionTableTextView",
+          "title": "Phiên bản",
+          "text": "0.2.0~beta1"
+        },
+        {
+          "class": "DepictionTableTextView",
+          "title": "Thiết bị",
+          "text": "iPhone 7 Plus"
+        },
+        {
+          "class": "DepictionTableTextView",
+          "title": "Hệ điều hành",
+          "text": "iOS 15.8.8"
+        },
+        {
+          "class": "DepictionTableTextView",
+          "title": "Môi trường",
+          "text": "Dopamine rootless · arm64"
+        },
+        {
+          "class": "DepictionSubheaderView",
+          "title": "Trạng thái beta"
+        },
+        {
+          "class": "DepictionMarkdownView",
+          "markdown": "Bản 0.1.1 đã có xác nhận hoạt động. Nút Control Center của 0.2.0 đã được xác nhận hiển thị; các chế độ mới cần thử thêm.\n\nRespring sau khi cài. Không dành cho iPhone chưa jailbreak."
+        },
+        {
+          "class": "DepictionTableButtonView",
+          "title": "Hướng dẫn và mã nguồn",
+          "action": "https://github.com/Sentechtipsvn/Sentechtipsvn.github.io/blob/master/projects/ShareWifi/README.md",
+          "openExternal": 1
+        }
+      ]
+    },
+    {
+      "class": "DepictionStackView",
+      "tabname": "Thay đổi",
+      "views": [
+        {
+          "class": "DepictionHeaderView",
+          "title": "0.2.0~beta1"
+        },
+        {
+          "class": "DepictionMarkdownView",
+          "markdown": "- Thêm ba chế độ dừng và khôi phục trước phiên.\n- Thêm module Control Center, giữ các chức năng 0.1.1."
+        }
+      ]
+    }
+  ]
+}

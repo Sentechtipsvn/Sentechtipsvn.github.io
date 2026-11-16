@@ -1,0 +1,56 @@
+{
+  "package": "ShareWifi-0.2.0-beta1-iphoneos-arm64.deb",
+  "sha256": "e74c05163764d0ca657ea025a2e526a9fea3dfae94c61240cc1471e12bfaaf9d",
+  "payload_files": 11,
+  "binaries": {
+    "controller": {
+      "architecture": "arm64",
+      "minimum_ios": "15.0",
+      "verified_code_directories": 1,
+      "dependencies": [
+        "/System/Library/Frameworks/UIKit.framework/UIKit",
+        "/System/Library/Frameworks/Foundation.framework/Foundation",
+        "/usr/lib/libobjc.A.dylib",
+        "@rpath/CydiaSubstrate.framework/CydiaSubstrate",
+        "/usr/lib/libSystem.B.dylib",
+        "/System/Library/Frameworks/CoreFoundation.framework/CoreFoundation"
+      ],
+      "rpaths": [
+        "/var/jb/Library/Frameworks",
+        "@loader_path/.jbroot/Library/Frameworks"
+      ]
+    },
+    "module": {
+      "architecture": "arm64",
+      "minimum_ios": "15.0",
+      "verified_code_directories": 1,
+      "dependencies": [
+        "/System/Library/PrivateFrameworks/ControlCenterUIKit.framework/ControlCenterUIKit",
+        "/System/Library/Frameworks/UIKit.framework/UIKit",
+        "/System/Library/Frameworks/Foundation.framework/Foundation",
+        "/usr/lib/libobjc.A.dylib",
+        "/usr/lib/libSystem.B.dylib",
+        "/System/Library/Frameworks/CoreFoundation.framework/CoreFoundation"
+      ],
+      "rpaths": []
+    },
+    "app": {
+      "architecture": "arm64",
+      "minimum_ios": "15.0",
+      "verified_code_directories": 1,
+      "dependencies": [
+        "/System/Library/Frameworks/UIKit.framework/UIKit",
+        "/System/Library/Frameworks/Foundation.framework/Foundation",
+        "/usr/lib/libobjc.A.dylib",
+        "/usr/lib/libSystem.B.dylib",
+        "/System/Library/Frameworks/CoreFoundation.framework/CoreFoundation"
+      ],
+      "rpaths": []
+    }
+  },
+  "host_arp_tests": "passed with AddressSanitizer + UBSan; LeakSanitizer disabled due host ptrace",
+  "host_method_abi_tests": "BOOL getter/action regression and unsafe ABI rejection cases passed with AddressSanitizer + UBSan",
+  "host_profile_tests": "16 radio combinations, 256 restores, order/mask and missing-session rejection passed with ASan + UBSan",
+  "device_tested": false,
+  "native_hotspot_radio_toggles_and_icon_tap": "Requires iPhone 7 Plus iOS 15.8.8 validation"
+}

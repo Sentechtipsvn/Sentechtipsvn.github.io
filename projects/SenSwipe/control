@@ -1,0 +1,10 @@
+Package: vn.sentechtips.senswipe
+Name: SenSwipe
+Version: 0.1.0~beta1
+Architecture: iphoneos-arm64
+Description: Experimental native home gestures for iPhone 7 Plus on iOS 15.8.8. Keeps original device identity and keyboard layout. Device testing required.
+Maintainer: Sentechtipsvn
+Author: Sentechtipsvn
+Section: Tweaks
+Depends: firmware (>= 15.8.8), firmware (<< 15.8.9), mobilesubstrate, preferenceloader
+Tag: role::enduser

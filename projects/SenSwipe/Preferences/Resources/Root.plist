@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0"><array>
+<dict><key>cell</key><string>PSGroupCell</string><key>label</key><string>SenSwipe · Bản thử nghiệm 0.1.0</string><key>footerText</key><string>Dành riêng iPhone 7 Plus · iOS 15.8.8 · Dopamine. Thay đổi có hiệu lực sau khi respring. Chưa kiểm thử trên thiết bị thật.</string></dict>
+<dict><key>cell</key><string>PSSwitchCell</string><key>label</key><string>Bật cử chỉ</string><key>defaults</key><string>vn.sentechtips.senswipe</string><key>key</key><string>Enabled</string><key>default</key><true/><key>get</key><string>readPreferenceValue:</string><key>set</key><string>setPreferenceValue:specifier:</string></dict>
+<dict><key>cell</key><string>PSGroupCell</string><key>label</key><string>Thao tác</string><key>footerText</key><string>Vuốt lên từ đáy để về Home. Vuốt lên rồi giữ để mở đa nhiệm. Control Center ở góc trên phải giúp tránh trùng vùng vuốt Home.</string></dict>
+<dict><key>cell</key><string>PSSwitchCell</string><key>label</key><string>Control Center góc trên phải</string><key>defaults</key><string>vn.sentechtips.senswipe</string><key>key</key><string>ControlCenterEnabled</string><key>default</key><true/><key>get</key><string>readPreferenceValue:</string><key>set</key><string>setPreferenceValue:specifier:</string></dict>
+<dict><key>cell</key><string>PSSwitchCell</string><key>label</key><string>Hiện thanh Home</string><key>defaults</key><string>vn.sentechtips.senswipe</string><key>key</key><string>ShowHomeBar</string><key>default</key><false/><key>get</key><string>readPreferenceValue:</string><key>set</key><string>setPreferenceValue:specifier:</string></dict>
+<dict><key>cell</key><string>PSGroupCell</string><key>label</key><string>Giữ bố cục gốc</string><key>footerText</key><string>SenSwipe không sửa MobileGestalt, nhận diện thiết bị, safe area hoặc bàn phím. Nếu từng giả iPhone X bằng Filza, cần khôi phục đúng bản gốc trước khi thử. © Sentechtipsvn</string></dict>
+</array></plist>

@@ -1,0 +1,8 @@
+#!/bin/sh
+set -e
+if [ "$1" = configure ]; then
+    if [ -x /var/jb/usr/bin/uicache ]; then
+        /var/jb/usr/bin/uicache -p /var/jb/Applications/ShareWifi.app || true
+    fi
+fi
+exit 0

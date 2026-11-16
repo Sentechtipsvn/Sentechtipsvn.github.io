@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+.DS_Store
+projects/**/build/
+projects/**/packages/*
+!projects/**/packages/Verification.json

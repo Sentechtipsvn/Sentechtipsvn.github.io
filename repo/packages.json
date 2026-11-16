@@ -1,0 +1,76 @@
+{
+  "name": "Sentechtipsvn Tweak",
+  "source": "https://sentechtipsvn.github.io/",
+  "packages": [
+    {
+      "slug": "quickcontrol",
+      "name": "QuickControl",
+      "version": "0.1.0~beta1",
+      "file": "QuickControl-0.1.0-beta1-iphoneos-arm64.deb",
+      "source": "QuickControl-0.1.0-beta1-Source.zip",
+      "summary": "Khay tiện ích nổi, mở nhanh ứng dụng, URL và phím tắt.",
+      "features": [
+        "Khay kính mờ, tay nắm đổi cạnh và kéo dọc.",
+        "Tối đa 12 nút tùy chỉnh; tích hợp điều khiển ShareWifi 0.2.x.",
+        "QR văn bản/đường dẫn offline và nút mở khay Control Center."
+      ],
+      "status": "Đã biên dịch, chạy kiểm tra host và kiểm tra gói. Chưa chạy trên iPhone thật.",
+      "changelog": [
+        "Bản beta đầu: khay nổi, cấu hình, QR offline và module Control Center."
+      ],
+      "package": "vn.sentechtips.quickcontrol",
+      "icon": "quickcontrol.png",
+      "url": "https://sentechtipsvn.github.io/debs/QuickControl-0.1.0-beta1-iphoneos-arm64.deb",
+      "size": 59736,
+      "sha256": "febd53aad16a4ef302d2248eb53e9046c882088c2d65cdff3c6b0a9ac45bfbec",
+      "guide": "https://github.com/Sentechtipsvn/Sentechtipsvn.github.io/blob/master/projects/QuickControl/README.md"
+    },
+    {
+      "slug": "senswipe",
+      "name": "SenSwipe",
+      "version": "0.1.0~beta1",
+      "file": "SenSwipe-0.1.0-beta1-iphoneos-arm64.deb",
+      "source": "SenSwipe-0.1.0-beta1-Source.zip",
+      "summary": "Cử chỉ Home kiểu iPhone X, giữ nhận diện và bố cục bàn phím gốc.",
+      "features": [
+        "Vuốt về Home và mở đa nhiệm bằng cơ chế native.",
+        "Tùy chọn Control Center góc phải và thanh Home.",
+        "Giới hạn can thiệp vào SpringBoard."
+      ],
+      "status": "Đã có phản hồi cử chỉ chạy mượt trên iPhone 7 Plus của tác giả. Các tình huống khác vẫn cần kiểm thử.",
+      "changelog": [
+        "Bản beta đầu: cử chỉ Home, tùy chọn Control Center và Home bar."
+      ],
+      "package": "vn.sentechtips.senswipe",
+      "icon": "senswipe.png",
+      "url": "https://sentechtipsvn.github.io/debs/SenSwipe-0.1.0-beta1-iphoneos-arm64.deb",
+      "size": 8012,
+      "sha256": "f2c269d338c9b0314038d4ac84b4eef8fdd5d19a14d8465df10474b10f703d79",
+      "guide": "https://github.com/Sentechtipsvn/Sentechtipsvn.github.io/blob/master/projects/SenSwipe/README.md"
+    },
+    {
+      "slug": "sharewifi",
+      "name": "ShareWifi",
+      "version": "0.2.0~beta1",
+      "file": "ShareWifi-0.2.0-beta1-iphoneos-arm64.deb",
+      "source": "ShareWifi-0.2.0-beta1-Source.zip",
+      "summary": "Bật chia sẻ mạng một chạm, xem máy khách và điều khiển từ Control Center.",
+      "features": [
+        "Bật dữ liệu di động, Wi-Fi, Bluetooth và hotspot cùng một thao tác.",
+        "Ba cách dừng: tắt cả bộ, chỉ hotspot, khôi phục trước phiên.",
+        "Đọc số kết nối hệ thống, danh sách ARP và tên riêng thiết bị."
+      ],
+      "status": "Bản 0.1.1 đã có xác nhận hoạt động. Nút Control Center của 0.2.0 đã được xác nhận hiển thị; các chế độ mới cần thử thêm.",
+      "changelog": [
+        "Thêm ba chế độ dừng và khôi phục trước phiên.",
+        "Thêm module Control Center, giữ các chức năng 0.1.1."
+      ],
+      "package": "vn.sentechtips.sharewifi",
+      "icon": "sharewifi.png",
+      "url": "https://sentechtipsvn.github.io/debs/ShareWifi-0.2.0-beta1-iphoneos-arm64.deb",
+      "size": 76552,
+      "sha256": "e74c05163764d0ca657ea025a2e526a9fea3dfae94c61240cc1471e12bfaaf9d",
+      "guide": "https://github.com/Sentechtipsvn/Sentechtipsvn.github.io/blob/master/projects/ShareWifi/README.md"
+    }
+  ]
+}

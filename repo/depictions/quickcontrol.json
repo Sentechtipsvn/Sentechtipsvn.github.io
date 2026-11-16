@@ -1,0 +1,69 @@
+{
+  "class": "DepictionTabView",
+  "minVersion": "0.4",
+  "tintColor": "#168A61",
+  "tabs": [
+    {
+      "class": "DepictionStackView",
+      "tabname": "Giới thiệu",
+      "views": [
+        {
+          "class": "DepictionHeaderView",
+          "title": "QuickControl"
+        },
+        {
+          "class": "DepictionMarkdownView",
+          "markdown": "Khay tiện ích nổi, mở nhanh ứng dụng, URL và phím tắt.\n\n- Khay kính mờ, tay nắm đổi cạnh và kéo dọc.\n- Tối đa 12 nút tùy chỉnh; tích hợp điều khiển ShareWifi 0.2.x.\n- QR văn bản/đường dẫn offline và nút mở khay Control Center."
+        },
+        {
+          "class": "DepictionTableTextView",
+          "title": "Phiên bản",
+          "text": "0.1.0~beta1"
+        },
+        {
+          "class": "DepictionTableTextView",
+          "title": "Thiết bị",
+          "text": "iPhone 7 Plus"
+        },
+        {
+          "class": "DepictionTableTextView",
+          "title": "Hệ điều hành",
+          "text": "iOS 15.8.8"
+        },
+        {
+          "class": "DepictionTableTextView",
+          "title": "Môi trường",
+          "text": "Dopamine rootless · arm64"
+        },
+        {
+          "class": "DepictionSubheaderView",
+          "title": "Trạng thái beta"
+        },
+        {
+          "class": "DepictionMarkdownView",
+          "markdown": "Đã biên dịch, chạy kiểm tra host và kiểm tra gói. Chưa chạy trên iPhone thật.\n\nRespring sau khi cài. Không dành cho iPhone chưa jailbreak."
+        },
+        {
+          "class": "DepictionTableButtonView",
+          "title": "Hướng dẫn và mã nguồn",
+          "action": "https://github.com/Sentechtipsvn/Sentechtipsvn.github.io/blob/master/projects/QuickControl/README.md",
+          "openExternal": 1
+        }
+      ]
+    },
+    {
+      "class": "DepictionStackView",
+      "tabname": "Thay đổi",
+      "views": [
+        {
+          "class": "DepictionHeaderView",
+          "title": "0.1.0~beta1"
+        },
+        {
+          "class": "DepictionMarkdownView",
+          "markdown": "- Bản beta đầu: khay nổi, cấu hình, QR offline và module Control Center."
+        }
+      ]
+    }
+  ]
+}

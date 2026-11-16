@@ -1,0 +1,10 @@
+Package: vn.sentechtips.quickcontrol
+Name: QuickControl
+Version: 0.1.0~beta1
+Architecture: iphoneos-arm64
+Description: Floating utility shelf and configurable launcher for iPhone 7 Plus iOS 15.8.8. Physical device validation required.
+Maintainer: Sentechtipsvn
+Author: Sentechtipsvn
+Section: Utilities
+Depends: firmware (>= 15.8.8), firmware (<< 15.8.9), mobilesubstrate, uikittools, com.opa334.ccsupport (>= 1.3.10)
+Tag: role::enduser

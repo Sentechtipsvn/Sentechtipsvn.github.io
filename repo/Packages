@@ -1,0 +1,60 @@
+Package: vn.sentechtips.quickcontrol
+Version: 0.1.0~beta1
+Architecture: iphoneos-arm64
+Maintainer: Sentechtipsvn
+Depends: firmware (>= 15.8.8), firmware (<< 15.8.9), mobilesubstrate, uikittools, com.opa334.ccsupport (>= 1.3.10)
+Filename: ./debs/QuickControl-0.1.0-beta1-iphoneos-arm64.deb
+Size: 59736
+MD5sum: a6e887ef219a104b1953b63890de7469
+SHA1: 8c3013eaef141cfbafba66c5344380f531c39f09
+SHA256: febd53aad16a4ef302d2248eb53e9046c882088c2d65cdff3c6b0a9ac45bfbec
+Section: Utilities
+Description: Floating utility shelf and configurable launcher for iPhone 7 Plus iOS 15.8.8. Physical device validation required.
+Tag: role::enduser
+Author: Sentechtipsvn
+Name: QuickControl
+Homepage: https://github.com/Sentechtipsvn/Sentechtipsvn.github.io
+Icon: https://sentechtipsvn.github.io/icons/quickcontrol.png
+Depiction: https://github.com/Sentechtipsvn/Sentechtipsvn.github.io/blob/master/projects/QuickControl/README.md
+SileoDepiction: https://sentechtipsvn.github.io/depictions/quickcontrol.json
+
+Package: vn.sentechtips.senswipe
+Version: 0.1.0~beta1
+Architecture: iphoneos-arm64
+Maintainer: Sentechtipsvn
+Depends: firmware (>= 15.8.8), firmware (<< 15.8.9), mobilesubstrate, preferenceloader
+Filename: ./debs/SenSwipe-0.1.0-beta1-iphoneos-arm64.deb
+Size: 8012
+MD5sum: 56c4b9cc307bbb06b60e805075d79ee1
+SHA1: afcc8004028e4d742b64e58c99254ea7914c2658
+SHA256: f2c269d338c9b0314038d4ac84b4eef8fdd5d19a14d8465df10474b10f703d79
+Section: Tweaks
+Description: Experimental native home gestures for iPhone 7 Plus on iOS 15.8.8. Keeps original device identity and keyboard layout. Device testing required.
+Tag: role::enduser
+Author: Sentechtipsvn
+Name: SenSwipe
+Homepage: https://github.com/Sentechtipsvn/Sentechtipsvn.github.io
+Icon: https://sentechtipsvn.github.io/icons/senswipe.png
+Depiction: https://github.com/Sentechtipsvn/Sentechtipsvn.github.io/blob/master/projects/SenSwipe/README.md
+SileoDepiction: https://sentechtipsvn.github.io/depictions/senswipe.json
+
+Package: vn.sentechtips.sharewifi
+Version: 0.2.0~beta1
+Architecture: iphoneos-arm64
+Maintainer: Sentechtipsvn
+Depends: firmware (>= 15.8.8), firmware (<< 15.8.9), mobilesubstrate, uikittools, com.opa334.ccsupport (>= 1.3.10)
+Filename: ./debs/ShareWifi-0.2.0-beta1-iphoneos-arm64.deb
+Size: 76552
+MD5sum: dcce3c35475028389104a3268364ff56
+SHA1: 080e61cc9d882000f5a3fcd94757f65af9fa3223
+SHA256: e74c05163764d0ca657ea025a2e526a9fea3dfae94c61240cc1471e12bfaaf9d
+Section: Utilities
+Description: One-tap cellular hotspot controller and local client panel for iPhone 7 Plus on iOS 15.8.8. Experimental; physical device validation required.
+Tag: role::enduser
+Author: Sentechtipsvn
+Name: ShareWifi
+Homepage: https://github.com/Sentechtipsvn/Sentechtipsvn.github.io
+Icon: https://sentechtipsvn.github.io/icons/sharewifi.png
+Depiction: https://github.com/Sentechtipsvn/Sentechtipsvn.github.io/blob/master/projects/ShareWifi/README.md
+SileoDepiction: https://sentechtipsvn.github.io/depictions/sharewifi.json
+

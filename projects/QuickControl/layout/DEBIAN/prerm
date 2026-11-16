@@ -1,0 +1,10 @@
+#!/bin/sh
+set -e
+case "$1" in
+    remove|deconfigure)
+        if [ -x /var/jb/usr/bin/uicache ]; then
+            /var/jb/usr/bin/uicache -u /var/jb/Applications/QuickControl.app || true
+        fi
+        ;;
+esac
+exit 0

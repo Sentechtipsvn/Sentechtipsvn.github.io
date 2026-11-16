@@ -1,0 +1,55 @@
+{
+  "package": "QuickControl-0.1.0-beta1-iphoneos-arm64.deb",
+  "sha256": "febd53aad16a4ef302d2248eb53e9046c882088c2d65cdff3c6b0a9ac45bfbec",
+  "payload_files": 11,
+  "binaries": {
+    "controller": {
+      "architecture": "arm64",
+      "minimum_ios": "15.0",
+      "verified_code_directories": 1,
+      "dependencies": [
+        "/System/Library/Frameworks/UIKit.framework/UIKit",
+        "/System/Library/Frameworks/CoreGraphics.framework/CoreGraphics",
+        "/System/Library/Frameworks/Foundation.framework/Foundation",
+        "/System/Library/Frameworks/QuartzCore.framework/QuartzCore",
+        "/usr/lib/libobjc.A.dylib",
+        "/usr/lib/libSystem.B.dylib",
+        "/System/Library/Frameworks/CoreFoundation.framework/CoreFoundation"
+      ],
+      "rpaths": []
+    },
+    "module": {
+      "architecture": "arm64",
+      "minimum_ios": "15.0",
+      "verified_code_directories": 1,
+      "dependencies": [
+        "/System/Library/PrivateFrameworks/ControlCenterUIKit.framework/ControlCenterUIKit",
+        "/System/Library/Frameworks/UIKit.framework/UIKit",
+        "/System/Library/Frameworks/CoreGraphics.framework/CoreGraphics",
+        "/System/Library/Frameworks/Foundation.framework/Foundation",
+        "/usr/lib/libobjc.A.dylib",
+        "/usr/lib/libSystem.B.dylib",
+        "/System/Library/Frameworks/CoreFoundation.framework/CoreFoundation"
+      ],
+      "rpaths": []
+    },
+    "app": {
+      "architecture": "arm64",
+      "minimum_ios": "15.0",
+      "verified_code_directories": 1,
+      "dependencies": [
+        "/System/Library/Frameworks/UIKit.framework/UIKit",
+        "/System/Library/Frameworks/CoreGraphics.framework/CoreGraphics",
+        "/System/Library/Frameworks/Foundation.framework/Foundation",
+        "/System/Library/Frameworks/CoreImage.framework/CoreImage",
+        "/usr/lib/libobjc.A.dylib",
+        "/usr/lib/libSystem.B.dylib",
+        "/System/Library/Frameworks/CoreFoundation.framework/CoreFoundation"
+      ],
+      "rpaths": []
+    }
+  },
+  "host_policy_tests": "Touch/lock gating, stale state, position, URL/bundle validation, BOOL/void ABI and 10,000 malformed strings passed with ASan + UBSan; LeakSanitizer disabled due host ptrace",
+  "device_tested": false,
+  "overlay_gestures_lock_lifecycle_launching_QR_and_CC": "Requires iPhone 7 Plus iOS 15.8.8 validation"
+}
