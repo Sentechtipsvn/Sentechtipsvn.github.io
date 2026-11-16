@@ -1,5 +1,6 @@
 #import <UIKit/UIKit.h>
 #import "SWCommon.h"
+#import "SWSettings.h"
 
 @interface SWPanel : UITableViewController
 @property(nonatomic,strong) NSDictionary *status;
@@ -114,13 +115,21 @@ static UIColor *SWGreen(void) { return [UIColor colorWithRed:0.08 green:0.57 blu
     [self.view setNeedsLayout];
 }
 - (void)togglePressed { [self send:@"toggle"]; }
+- (void)radioChanged:(UISwitch *)sender {
+    if(sender.tag<0||sender.tag>=SWRadioCount)return;
+    NSString *key=SWRadioKeys()[sender.tag];
+    [[UISelectionFeedbackGenerator new] selectionChanged];
+    [self send:SWRadioCommand(key,sender.on)];
+    // Keep the thumb tied to readback, including failures or iOS side effects.
+    [self reload];
+}
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView { (void)tableView;return 3; }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     (void)tableView;return section==0?4:(section==1?MAX((NSInteger)self.devices.count,1):7);
 }
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     (void)tableView;
-    if(section==0)return @"Trạng thái thực tế";
+    if(section==0)return @"Kết nối";
     if(section==2)return @"Điều khiển";
     id count=self.status[@"systemCount"];
     return [count isKindOfClass:NSNumber.class]?[NSString stringWithFormat:@"Kết nối hệ thống: %@",count]:@"Thiết bị · chưa đọc được số kết nối";
@@ -129,7 +138,7 @@ static UIColor *SWGreen(void) { return [UIColor colorWithRed:0.08 green:0.57 blu
     (void)tableView;
     if(section==0)return [NSString stringWithFormat:@"Internet: %@",self.status[@"internet"]?:@"Chưa kiểm tra"];
     if(section==1)return @"Danh sách dưới đây là máy vừa thấy qua ARP, không phải bằng chứng chắc chắn còn online. Số kết nối hệ thống có thể khác. Chạm để đặt tên riêng.";
-    return @"ShareWifi 0.2.0 beta 1 · © Sentechtipsvn\nRời ứng dụng không tắt hotspot. Tắt dữ liệu di động vẫn giữ nghe gọi/SMS. iOS có thể tự ngắt hotspot khi không có máy dùng.";
+    return [NSString stringWithFormat:@"ShareWifi %@ · © Sentechtipsvn\nRời ứng dụng không tắt hotspot. Tắt dữ liệu di động vẫn giữ nghe gọi/SMS. iOS có thể tự ngắt hotspot khi không có máy dùng.",SW_VERSION];
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     (void)tableView;
@@ -146,6 +155,13 @@ static UIColor *SWGreen(void) { return [UIColor colorWithRed:0.08 green:0.57 blu
         cell.textLabel.text=titles[indexPath.row];cell.detailTextLabel.text=SWPowerText(power);
         cell.imageView.image=[UIImage systemImageNamed:symbols[indexPath.row]];
         cell.imageView.tintColor=[power isEqual:@YES]?SWGreen():UIColor.secondaryLabelColor;
+        UISwitch *toggle=[UISwitch new];toggle.tag=indexPath.row;toggle.onTintColor=SWGreen();
+        toggle.on=[power isEqual:@YES];toggle.accessibilityLabel=titles[indexPath.row];
+        BOOL fresh=self.status.count&&NSDate.date.timeIntervalSince1970-[self.status[@"updated"] doubleValue]<15;
+        BOOL waiting=self.pending.length&&NSDate.date.timeIntervalSince1970<self.pendingUntil;
+        toggle.enabled=fresh&&![self.status[@"busy"] boolValue]&&!waiting&&[power isKindOfClass:NSNumber.class];
+        [toggle addTarget:self action:@selector(radioChanged:) forControlEvents:UIControlEventValueChanged];
+        cell.accessoryView=toggle;
         cell.selectionStyle=UITableViewCellSelectionStyleNone;
     } else if(indexPath.section==1) {
         if(!self.devices.count) {
@@ -215,26 +231,14 @@ static UIColor *SWGreen(void) { return [UIColor colorWithRed:0.08 green:0.57 blu
     [self presentViewController:alert animated:YES completion:nil];
 }
 - (void)settings {
-    BOOL disabled=[SWRead(@"settings.plist")[@"disableIconToggle"]boolValue];
-    UIAlertController *alert=[UIAlertController alertControllerWithTitle:@"Tùy chỉnh ShareWifi" message:@"Chế độ khi tắt dùng chung cho nút chính, biểu tượng và Control Center. Chạm biểu tượng để bật/tắt nhanh khi hook tương thích. Nhấn giữ → Bảng điều khiển để mở giao diện. Có thể đổi sang luôn mở bảng điều khiển." preferredStyle:UIAlertControllerStyleAlert];
-    [alert addAction:[UIAlertAction actionWithTitle:disabled?@"Bật thao tác một chạm":@"Luôn mở bảng điều khiển" style:UIAlertActionStyleDefault handler:^(__unused UIAlertAction *action){
-        NSMutableDictionary *settings=[SWRead(@"settings.plist")mutableCopy];settings[@"disableIconToggle"]=@(!disabled);SWWrite(settings,@"settings.plist");
-    }]];
-    for(NSString *mode in @[@"off",@"hotspotOnly",@"restoreSession"]) {
-        NSString *title=[NSString stringWithFormat:@"%@ %@",[mode isEqual:SWStopMode()]?@"✓":@"○",SWStopTitle(mode)];
-        [alert addAction:[UIAlertAction actionWithTitle:title style:UIAlertActionStyleDefault handler:^(__unused UIAlertAction *action){
-            NSMutableDictionary *settings=[SWRead(@"settings.plist")mutableCopy];settings[@"stopMode"]=mode;
-            SWWrite(settings,@"settings.plist");[self manualRefresh];
-        }]];
-    }
-    [alert addAction:[UIAlertAction actionWithTitle:@"Đóng" style:UIAlertActionStyleCancel handler:nil]];
-    [self presentViewController:alert animated:YES completion:nil];
+    [self.navigationController pushViewController:[SWSettings new] animated:YES];
 }
 - (void)diagnostics {
     NSDictionary *redacted=@{@"version":self.status[@"version"]?:@"unknown",@"powers":self.status[@"powers"]?:@{},
         @"stopMode":SWStopMode(),@"canRestoreSession":self.status[@"canRestoreSession"]?:@NO,
         @"phase":self.status[@"phase"]?:@"unknown",@"apiError":self.status[@"apiError"]?:@"",
         @"message":self.status[@"message"]?:@"",@"iconTapHook":self.status[@"iconTapHook"]?:@NO,
+        @"hapticTouchEnabled":@(SWHapticEnabled()),@"hapticTouchHook":self.status[@"hapticTouchHook"]?:@NO,
         @"systemCount":self.status[@"systemCount"]?:@"unknown",@"hotspotAPI":self.status[@"hotspotAPI"]?:@{}};
     NSData *data=[NSJSONSerialization dataWithJSONObject:redacted options:NSJSONWritingPrettyPrinted error:NULL];
     NSString *text=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding]?:@"Chưa có trạng thái";

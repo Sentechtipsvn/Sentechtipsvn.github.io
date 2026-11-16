@@ -48,7 +48,7 @@ Các bản cập nhật tiếp theo được phân phối qua địa chỉ ngu�
 | Tweak | Phiên bản | Giới thiệu |
 | --- | --- | --- |
 | [SenSwipe](projects/SenSwipe/README.md) | `0.1.0~beta1` | Cử chỉ Home và đa nhiệm kiểu iPhone X, tùy chọn Control Center và thanh Home. |
-| [ShareWifi](projects/ShareWifi/README.md) | `0.2.0~beta1` | Điều khiển chia sẻ mạng một chạm, các chế độ dừng và module Control Center. |
+| [ShareWifi](projects/ShareWifi/README.md) | `0.2.1~beta1` | Công tắc riêng, menu Haptic Touch, chia sẻ mạng một chạm và Control Center. |
 | [QuickControl](projects/QuickControl/README.md) | `0.1.0~beta1` | Khay tiện ích nổi để mở ứng dụng, URL, phím tắt và tạo QR offline. |
 
 Xem tài liệu của từng dự án để biết tính năng, cách cấu hình, phụ thuộc và những giới hạn hiện tại.

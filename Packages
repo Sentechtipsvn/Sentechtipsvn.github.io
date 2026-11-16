@@ -39,17 +39,17 @@ Depiction: https://github.com/Sentechtipsvn/Sentechtipsvn.github.io/blob/master/
 SileoDepiction: https://sentechtipsvn.github.io/depictions/senswipe.json
 
 Package: vn.sentechtips.sharewifi
-Version: 0.2.0~beta1
+Version: 0.2.1~beta1
 Architecture: iphoneos-arm64
 Maintainer: Sentechtipsvn
 Depends: firmware (>= 15.8.8), firmware (<< 15.8.9), mobilesubstrate, uikittools, com.opa334.ccsupport (>= 1.3.10)
-Filename: ./debs/ShareWifi-0.2.0-beta1-iphoneos-arm64.deb
-Size: 76552
-MD5sum: dcce3c35475028389104a3268364ff56
-SHA1: 080e61cc9d882000f5a3fcd94757f65af9fa3223
-SHA256: e74c05163764d0ca657ea025a2e526a9fea3dfae94c61240cc1471e12bfaaf9d
+Filename: ./debs/ShareWifi-0.2.1-beta1-iphoneos-arm64.deb
+Size: 86504
+MD5sum: c33fc892dab56e19b07d0a041e94cffc
+SHA1: 7c8b407ed6c37917f2880f2cd5c9ce3564df2456
+SHA256: 35b4015429f8516ab8a40b3682aa1291becdd0d4bf188fabc55132983048e883
 Section: Utilities
-Description: One-tap cellular hotspot controller and local client panel for iPhone 7 Plus on iOS 15.8.8. Experimental; physical device validation required.
+Description: Individual radio switches, Home Screen Haptic Touch and one-tap cellular hotspot controller for iPhone 7 Plus on iOS 15.8.8. Experimental; physical device validation required.
 Tag: role::enduser
 Author: Sentechtipsvn
 Name: ShareWifi

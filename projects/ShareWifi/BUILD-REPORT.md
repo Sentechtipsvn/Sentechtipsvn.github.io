@@ -1,36 +1,45 @@
-# ShareWifi 0.2.0 beta 1 — Kết quả kiểm tra
+# ShareWifi 0.2.1 beta 1 — Build verification
 
-## Trạng thái thiết bị
+## Result
 
-Sếp đã xác nhận 0.1.1 hoạt động trên iPhone 7 Plus iOS 15.8.8, có một máy iPhone 11 kết nối. 0.2.0 chưa cài/chạy trên iPhone thật trong quá trình build này. Không có thiết bị iOS hay giả lập SpringBoard trong môi trường build.
+Compiled the app, SpringBoard controller and Control Center module for arm64 with iPhoneOS15.6 SDK, Clang 11.1.0, `-Wall -Wextra -Werror`, Theos rootless stubs and ldid. Package verification passed for 11 rootless payload files and all three Mach-O code signatures/code pages. SHA-256 is recorded in `packages/Verification.json`.
 
-## Thay đổi
+This environment has no physical iPhone or SpringBoard simulator. The new UISwitch controls and Home Screen menu have not been exercised on-device. Existing user feedback covers the 0.1.1 sharing functions and the presence of the 0.2.0 Control Center module.
 
-- Giữ nguyên resolver `isDiscoverable`, ABI BOOL/void của `_toggleState`, readback và các API radio đã chạy được ở 0.1.1.
-- Thêm ba chế độ dừng. Chế độ chỉ hotspot có danh sách thao tác đúng một công tắc, không gọi setter của ba radio khác.
-- Bản ghi trước phiên độc lập với bản ghi trước thao tác, không ghi đè khi bật lặp trong phiên, giữ lại sau lỗi một phần, kết thúc sau dừng thành công. Hoàn tác khôi phục cả trạng thái công tắc và bản ghi phiên tương ứng.
-- Không có bản ghi hợp lệ thì từ chối Khôi phục phiên; không tự chuyển thành Tắt cả bộ.
-- Module Control Center chuẩn CCUIToggleModule/CCSupport. Darwin notification riêng tránh ghi đè lệnh file của app. Controller quyết định chiều bật/tắt từ trạng thái thực, bỏ lệnh chồng khi bận. Module không báo thành công lạc quan.
-- Giữ ID gói/app và đường dẫn tùy chọn; thêm phụ thuộc CCSupport rootless. Không ép respring trong maintainer script.
+## Changes checked
 
-## Đã kiểm chứng
+- Four native UISwitch accessories in the app; controls stay tied to controller readback and are unavailable while busy, pending, stale or unknown.
+- Individual requests contain an explicit radio and target state. The plan contains exactly one radio; all other states are preserved as targets and their setters are never scheduled for this request. iOS may independently change dependent radios/hotspot.
+- Hotspot-on preflight requires data and Wi-Fi to be on; the full-on action retains its original dependency order.
+- Runtime-checked SBIconView shortcut-item getter and shortcut activation class hooks, scoped to ShareWifi. Optional provider hook is guarded separately. Only object/void signatures with the expected argument counts/types are accepted; exceptions fall back to the original menu.
+- New menu entries use live power reads and explicit target states. Unknown values offer refresh only. The original four static shortcuts remain in Info.plist and are retained in the augmented list. Editing/removal actions are not intercepted.
+- Settings include Haptic Touch enable/disable and four menu-visibility choices, all enabled by default. The old settings keys and aliases are preserved on writes.
+- Individual operations preserve the current session; a valid initial hotspot-on can capture a session. Undo uses a full, valid pre-operation snapshot and the corresponding prior session. No-op individual requests do not replace Undo.
+- Version remains in 0.2.x so QuickControl 0.1.0's existing version check continues to accept ShareWifi. Request/status paths and the Control Center Darwin notification remain unchanged.
 
-- App, controller và module biên dịch arm64 với `-Wall -Wextra -Werror`.
-- Test profile: 16 tổ hợp trạng thái, 256 tổ hợp khôi phục; kiểm tra thứ tự, mask chỉ hotspot, từ chối thiếu bản ghi/trạng thái lỗi, quy tắc ghi phiên.
-- Test ABI: BOOL getter/action, void action, từ chối chữ ký không phù hợp.
-- Test parser ARP: framing, padding, nhiều bản ghi, truncation, MAC, sockaddr lỗi và ABI không khớp.
-- Cả ba bộ chạy GCC AddressSanitizer và UBSan. LeakSanitizer tắt do host ptrace.
-- Giải nén .deb, kiểm tra chính xác 11 file payload, plist/filter/ID/quick actions, dependency CCSupport, giới hạn firmware.
-- Kiểm tra Mach-O arm64: controller dylib, app executable, module bundle; iOS deployment target; chữ ký ad-hoc code-page của cả ba; không liên kết đường dẫn máy build.
-- Gói rootless `/var/jb`, executable/maintainer scripts đúng quyền, dpkg archive owner root.
+## Host tests
 
-SHA-256 và kết quả binary nằm ở `packages/Verification.json`.
+All four suites passed with GCC AddressSanitizer and UndefinedBehaviorSanitizer; LeakSanitizer is disabled because the build host uses ptrace.
 
-## Chưa kiểm chứng
+| Suite | Coverage |
+| --- | --- |
+| ARP | Stream framing, interface padding, batches, truncation, invalid MAC/sockaddr and unknown ABI |
+| Method ABI | BOOL getter/action, void action and unsafe signature rejection |
+| Profiles | 16 power combinations, 256 restores, order/mask, missing state/session and session capture |
+| Individual radio | 128 explicit-target plans, exactly one scheduled radio, unknown peers and malformed commands |
 
-- Nạp module và bố cục Control Center thực tế trên iOS 15.8.8.
-- Quyền API, phản hồi radio/hotspot và hành vi tai nghe của bản mới trên iPhone.
-- Luồng khôi phục phiên/hoàn tác ở iOS khi radio bị thay đổi đồng thời từ ngoài ShareWifi.
-- Tình huống không có SIM/sóng, chế độ máy bay, khóa màn hình và máy khách ngủ/rời hotspot.
+## Package checks
 
-Chuỗi build: iPhoneOS15.6 SDK, Clang 11.1.0 (L1ghtmann test-210562a), Theos headers/libs rootless, ldid, dpkg-deb. CCSupport package ID/kiến trúc rootless được đối chiếu trong Packages của nguồn opa334. Không đóng gói CCSupport vào ShareWifi.
+- Package/app/module IDs, version 0.2.1/build 4, architecture and exact iOS 15.8.8 dependency bounds.
+- Four original static Home Screen shortcut types: panel, devices, on and off.
+- CCSupport dependency, module principal class/size, SpringBoard-only injection filter.
+- Maintainer script inventory, permissions, root archive ownership and no forced restart from postinst.
+- arm64 Mach-O types, deployment target, dependencies/rpaths and ad-hoc code-page integrity for app/controller/module.
+
+## Device checks still needed
+
+- Right-side switch layout in portrait/landscape and large text; readback and errors for each radio.
+- Home Screen getter/activation paths on iOS 15.8.8, menu capacity/order, labels and settings visibility. ABI validation does not prove the live menu uses the intercepted path.
+- Actual radio privileges and timing, including switching Wi-Fi/data off during hotspot sharing and hotspot activation with Bluetooth off.
+- Undo and restore after a sequence of individual operations, all three stop modes, Control Center and QuickControl integration.
+- Concurrent changes from Settings, stale menus, rapid taps, missing signal/SIM, Airplane Mode and respring.

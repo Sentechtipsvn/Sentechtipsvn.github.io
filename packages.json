@@ -51,25 +51,28 @@
     {
       "slug": "sharewifi",
       "name": "ShareWifi",
-      "version": "0.2.0~beta1",
-      "file": "ShareWifi-0.2.0-beta1-iphoneos-arm64.deb",
-      "source": "ShareWifi-0.2.0-beta1-Source.zip",
-      "summary": "Bật chia sẻ mạng một chạm, xem máy khách và điều khiển từ Control Center.",
+      "version": "0.2.1~beta1",
+      "file": "ShareWifi-0.2.1-beta1-iphoneos-arm64.deb",
+      "source": "ShareWifi-0.2.1-beta1-Source.zip",
+      "summary": "Công tắc từng kết nối, menu Haptic Touch và chia sẻ mạng một chạm.",
       "features": [
-        "Bật dữ liệu di động, Wi-Fi, Bluetooth và hotspot cùng một thao tác.",
-        "Ba cách dừng: tắt cả bộ, chỉ hotspot, khôi phục trước phiên.",
-        "Đọc số kết nối hệ thống, danh sách ARP và tên riêng thiết bị."
+        "Bốn nút gạt riêng kiểu Cài đặt iOS, phản ánh trạng thái đọc lại.",
+        "Menu nhấn giữ biểu tượng bật/tắt từng kết nối; tùy chọn ẩn/hiện từng mục.",
+        "Giữ nút bật/tắt cả bộ, ba chế độ dừng, Hoàn tác và Control Center.",
+        "Số kết nối hệ thống, danh sách ARP/DHCP và tên riêng thiết bị."
       ],
-      "status": "Bản 0.1.1 đã có xác nhận hoạt động. Nút Control Center của 0.2.0 đã được xác nhận hiển thị; các chế độ mới cần thử thêm.",
+      "status": "Bản 0.2.1 đã biên dịch, qua kiểm tra logic và gói cài. Công tắc riêng và Haptic Touch mới cần xác nhận trên iPhone thật. Giữ tương thích QuickControl 0.1.0.",
       "changelog": [
-        "Thêm ba chế độ dừng và khôi phục trước phiên.",
-        "Thêm module Control Center, giữ các chức năng 0.1.1."
+        "Thêm UISwitch bên phải cho dữ liệu di động, Wi-Fi, Bluetooth và hotspot.",
+        "Thêm Tùy chỉnh → Haptic Touch: bật/tắt menu và chọn kết nối hiển thị.",
+        "Menu nhấn giữ điều khiển trực tiếp từng kết nối bằng trạng thái đích; giữ các quick action cũ.",
+        "Giữ các chức năng 0.2.0 và tương thích QuickControl 0.1.0."
       ],
       "package": "vn.sentechtips.sharewifi",
       "icon": "sharewifi.png",
-      "url": "https://sentechtipsvn.github.io/debs/ShareWifi-0.2.0-beta1-iphoneos-arm64.deb",
-      "size": 76552,
-      "sha256": "e74c05163764d0ca657ea025a2e526a9fea3dfae94c61240cc1471e12bfaaf9d",
+      "url": "https://sentechtipsvn.github.io/debs/ShareWifi-0.2.1-beta1-iphoneos-arm64.deb",
+      "size": 86504,
+      "sha256": "35b4015429f8516ab8a40b3682aa1291becdd0d4bf188fabc55132983048e883",
       "guide": "https://github.com/Sentechtipsvn/Sentechtipsvn.github.io/blob/master/projects/ShareWifi/README.md"
     }
   ]

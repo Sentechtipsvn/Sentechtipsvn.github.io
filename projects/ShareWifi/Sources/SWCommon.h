@@ -1,5 +1,8 @@
 #import <Foundation/Foundation.h>
 #import <sys/stat.h>
+#import "SWRadioAction.h"
+
+#define SW_VERSION @"0.2.1 beta 1"
 
 #define SW_BUNDLE @"vn.sentechtips.sharewifi"
 #define SW_DIRECTORY @"/var/mobile/Library/ShareWifi"
@@ -26,6 +29,27 @@ static inline NSDictionary *SWRead(NSString *name) {
 }
 static inline NSString *SWPowerText(id value) {
     return [value isKindOfClass:NSNumber.class] ? ([value boolValue] ? @"Bật" : @"Tắt") : @"Chưa đọc được";
+}
+static inline NSArray<NSString *> *SWRadioKeys(void) {
+    return @[@"data", @"wifi", @"bluetooth", @"hotspot"];
+}
+static inline NSString *SWRadioName(NSString *key) {
+    return @{@"data":@"Dữ liệu di động", @"wifi":@"Wi-Fi", @"bluetooth":@"Bluetooth", @"hotspot":@"Điểm truy cập cá nhân"}[key] ?: key;
+}
+static inline NSString *SWRadioSymbol(NSString *key) {
+    return @{@"data":@"antenna.radiowaves.left.and.right", @"wifi":@"wifi", @"bluetooth":@"wave.3.right", @"hotspot":@"personalhotspot"}[key] ?: @"switch.2";
+}
+static inline BOOL SWHapticEnabled(void) {
+    id value = SWRead(@"settings.plist")[@"hapticTouchEnabled"];
+    return [value isKindOfClass:NSNumber.class] ? [value boolValue] : YES;
+}
+static inline BOOL SWShowHapticRadio(NSString *key) {
+    id values = SWRead(@"settings.plist")[@"hapticRadios"];
+    id value = [values isKindOfClass:NSDictionary.class] ? values[key] : nil;
+    return [value isKindOfClass:NSNumber.class] ? [value boolValue] : YES;
+}
+static inline NSString *SWRadioCommand(NSString *key, BOOL on) {
+    return [NSString stringWithFormat:@"set.%@.%d", key, on ? 1 : 0];
 }
 
 // Unknown configuration values keep the established full-off default.

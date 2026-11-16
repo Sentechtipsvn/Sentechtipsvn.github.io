@@ -29,12 +29,15 @@ def main():
         check(filt=={'Filter':{'Bundles':['com.apple.springboard']}},'Incorrect injection filter')
         info=plistlib.loads((root/(app+'Info.plist')).read_bytes())
         check(info['CFBundleIdentifier']=='vn.sentechtips.sharewifi','Wrong app identity')
-        check(len(info['UIApplicationShortcutItems'])==4,'Missing home screen quick actions')
+        check({x['UIApplicationShortcutItemType'] for x in info['UIApplicationShortcutItems']}=={'panel','devices','on','off'},'Established Home Screen quick actions changed')
+        check(info['CFBundleShortVersionString']=='0.2.1' and info['CFBundleVersion']=='4','Wrong app version')
         module_info=plistlib.loads((root/(module+'Info.plist')).read_bytes())
         check(module_info['NSPrincipalClass']=='SWControlCenterModule','Wrong CC principal class')
         check(module_info['CFBundleIdentifier']=='vn.sentechtips.sharewifi.module','Wrong CC identity')
+        check(module_info['CFBundleShortVersionString']=='0.2.1','Wrong module version')
         check(module_info['CCSModuleSize']['Portrait']=={'Height':1,'Width':1},'Wrong CC size')
         control=(root/'DEBIAN/control').read_text()
+        check('Version: 0.2.1~beta1\n' in control,'Wrong package version')
         check('com.opa334.ccsupport (>= 1.3.10)' in control,'Missing CCSupport dependency')
         check('Architecture: iphoneos-arm64' in control,'Wrong package architecture')
         check('firmware (>= 15.8.8)' in control and 'firmware (<< 15.8.9)' in control,'Missing firmware restriction')
@@ -48,7 +51,9 @@ def main():
                 'host_arp_tests':'passed with AddressSanitizer + UBSan; LeakSanitizer disabled due host ptrace',
                 'host_method_abi_tests':'BOOL getter/action regression and unsafe ABI rejection cases passed with AddressSanitizer + UBSan',
                 'host_profile_tests':'16 radio combinations, 256 restores, order/mask and missing-session rejection passed with ASan + UBSan',
-                'device_tested':False,'native_hotspot_radio_toggles_and_icon_tap':'Requires iPhone 7 Plus iOS 15.8.8 validation'}
+                'host_radio_tests':'128 selected-radio plans, explicit command parsing, unknown peers and malformed requests passed with ASan + UBSan',
+                'device_tested':False,'native_hotspot_radio_toggles_and_icon_tap':'Requires iPhone 7 Plus iOS 15.8.8 validation',
+                'home_screen_haptic_menu':'Runtime ABI-checked hooks; compiled, not device-tested'}
         output=json.dumps(report,indent=2)+'\n'
         (package.parent/'Verification.json').write_text(output)
         print(output)

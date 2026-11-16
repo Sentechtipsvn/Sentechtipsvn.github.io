@@ -1,6 +1,6 @@
 {
-  "package": "ShareWifi-0.2.0-beta1-iphoneos-arm64.deb",
-  "sha256": "e74c05163764d0ca657ea025a2e526a9fea3dfae94c61240cc1471e12bfaaf9d",
+  "package": "ShareWifi-0.2.1-beta1-iphoneos-arm64.deb",
+  "sha256": "35b4015429f8516ab8a40b3682aa1291becdd0d4bf188fabc55132983048e883",
   "payload_files": 11,
   "binaries": {
     "controller": {
@@ -51,6 +51,8 @@
   "host_arp_tests": "passed with AddressSanitizer + UBSan; LeakSanitizer disabled due host ptrace",
   "host_method_abi_tests": "BOOL getter/action regression and unsafe ABI rejection cases passed with AddressSanitizer + UBSan",
   "host_profile_tests": "16 radio combinations, 256 restores, order/mask and missing-session rejection passed with ASan + UBSan",
+  "host_radio_tests": "128 selected-radio plans, explicit command parsing, unknown peers and malformed requests passed with ASan + UBSan",
   "device_tested": false,
-  "native_hotspot_radio_toggles_and_icon_tap": "Requires iPhone 7 Plus iOS 15.8.8 validation"
+  "native_hotspot_radio_toggles_and_icon_tap": "Requires iPhone 7 Plus iOS 15.8.8 validation",
+  "home_screen_haptic_menu": "Runtime ABI-checked hooks; compiled, not device-tested"
 }

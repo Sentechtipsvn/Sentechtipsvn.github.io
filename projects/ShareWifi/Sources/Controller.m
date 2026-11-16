@@ -7,6 +7,7 @@
 #import "SWClients.h"
 #import "SWMethodABI.h"
 #import "SWProfilePlan.h"
+#import "SWHapticMenu.h"
 
 extern void MSHookMessageEx(Class, SEL, IMP, IMP *);
 typedef unsigned char SWBoolean;
@@ -79,7 +80,7 @@ static NSString *SWHotspotGetter(id object) {
 
 static UIWindow *toastWindow;
 static NSString *SWName(NSString *key) {
-    return @{@"data":@"Dữ liệu di động",@"wifi":@"Wi-Fi",@"bluetooth":@"Bluetooth",@"hotspot":@"Điểm truy cập cá nhân"}[key] ?: key;
+    return SWRadioName(key);
 }
 static NSUInteger toastGeneration;
 static void SWToast(NSString *text) {
@@ -115,6 +116,7 @@ static void SWToast(NSString *text) {
 @property(nonatomic,strong) NSDictionary *undoSessionSnapshot;
 @property(nonatomic,strong) NSDictionary *nextSessionSnapshot;
 @property(nonatomic,copy) NSString *operation;
+@property(nonatomic,copy) NSString *individualKey;
 @property(nonatomic,strong) NSDictionary *target;
 @property(nonatomic,strong) NSArray *steps;
 @property(nonatomic,copy) NSString *message;
@@ -125,6 +127,7 @@ static void SWToast(NSString *text) {
 @property(nonatomic) BOOL busy;
 @property(nonatomic) BOOL iconOperation;
 @property(nonatomic) BOOL tapHook;
+@property(nonatomic) BOOL hapticHook;
 @property(nonatomic) BOOL restoring;
 @property(nonatomic) NSUInteger step;
 @property(nonatomic) NSUInteger generation;
@@ -208,11 +211,12 @@ static SWController *controller;
         @"legacyDiscoverablePresent":@([self.hotspot respondsToSelector:NSSelectorFromString(@"discoverable")]),
         @"toggleReturnType":toggleSignature ? @(toggleSignature.methodReturnType) : @"missing",
         @"toggleCompatible":@(SWCanPerformAction(self.hotspot, @"_toggleState"))};
-    NSMutableDictionary *status = [@{@"version":@"0.2.0 beta 1", @"updated":@(NSDate.date.timeIntervalSince1970),
+    NSMutableDictionary *status = [@{@"version":SW_VERSION, @"updated":@(NSDate.date.timeIntervalSince1970),
         @"powers":p, @"busy":@(self.busy), @"phase":self.phase ?: @"ready",
         @"message":self.message ?: @"", @"lastRequest":self.lastID ?: @"",
         @"canRestoreSession":@(self.sessionSnapshot != nil), @"stopMode":SWStopMode(),
         @"canUndo":@(self.snapshot != nil), @"iconTapHook":@(self.tapHook),
+        @"hapticTouchHook":@(self.hapticHook), @"hapticTouchEnabled":@(SWHapticEnabled()),
         @"internet":self.internet ?: @"Chưa kiểm tra", @"internetCheckedAt":@(self.verifiedAt),
         @"apiError":self.apiError ?: @"", @"systemCount":[self nativeCount], @"hotspotAPI":hotspotAPI} mutableCopy];
     if (NSDate.date.timeIntervalSince1970 < self.monitorUntil && [p[@"hotspot"] isEqual:@YES]) {
@@ -229,14 +233,34 @@ static SWController *controller;
     if (!SWCanPerformAction(self.hotspot,@"_toggleState")) return @"API hotspot chưa tương thích. Chưa thay đổi kết nối.";
     return nil;
 }
+- (NSString *)preflightRadio:(NSString *)key desired:(BOOL)on powers:(NSDictionary *)p {
+    if (![p[key] isKindOfClass:NSNumber.class]) return [NSString stringWithFormat:@"Chưa đọc được %@. Hãy làm mới và thử lại.",SWName(key)];
+    BOOL capable=[key isEqual:@"data"]?SWCellSet!=NULL:
+        ([key isEqual:@"wifi"]?SWCanSet(self.wifi,@"setWiFiEnabled:"):
+        ([key isEqual:@"bluetooth"]?SWCanSet(self.bluetooth,@"setPowered:"):SWCanPerformAction(self.hotspot,@"_toggleState")));
+    if (!capable) return [NSString stringWithFormat:@"API điều khiển %@ chưa tương thích. Chưa thay đổi kết nối.",SWName(key)];
+    if ([key isEqual:@"hotspot"] && on && ![p[key] isEqual:@YES]) {
+        if (![p[@"data"] isEqual:@YES]) return @"Bật Dữ liệu di động trước khi bật riêng Điểm truy cập cá nhân.";
+        if (![p[@"wifi"] isEqual:@YES]) return @"Bật Wi-Fi trước để chia sẻ mạng. Nút Bật chia sẻ mạng có thể bật cả bộ.";
+    }
+    return nil;
+}
 - (void)request:(NSString *)action fromIcon:(BOOL)icon {
     if ([action isEqualToString:@"refresh"]) { self.monitorUntil = NSDate.date.timeIntervalSince1970 + 12; [self refresh]; return; }
     if ([action isEqualToString:@"probe"]) { [self probe]; return; }
     if (self.busy) { if (icon) SWToast(@"ShareWifi đang xử lý…"); return; }
-    if (![@[@"toggle",@"on",@"off",@"stop",@"hotspotOnly",@"restoreSession",@"undo"] containsObject:action]) return;
+    int radio=-1,desired=-1;
+    BOOL individual=SWDecodeRadioAction(action.UTF8String,&radio,&desired);
+    if (!individual && ![@[@"toggle",@"on",@"off",@"stop",@"hotspotOnly",@"restoreSession",@"undo"] containsObject:action]) return;
+    self.apiError=@"";
     NSDictionary *p = [self powers];
-    NSString *failure = [self preflight:p];
+    NSString *individualKey=individual?SWRadioKeys()[radio]:nil;
+    NSString *failure = individual?[self preflightRadio:individualKey desired:desired powers:p]:[self preflight:p];
     if (failure) { self.phase=@"error";self.message=failure;[self publish];if(icon)SWToast(failure);return; }
+    if (individual && [p[individualKey] isEqual:@(desired)]) {
+        self.phase=@"ready";self.message=[NSString stringWithFormat:@"%@ đang %@.",SWName(individualKey),desired?@"bật":@"tắt"];
+        [self publish];if(icon)SWToast(self.message);return;
+    }
     if ([action isEqual:@"toggle"]) action=[p[@"hotspot"] boolValue]?@"stop":@"on";
     if ([action isEqual:@"stop"]) action=SWStopMode();
     self.restoring=[action isEqual:@"undo"];
@@ -246,11 +270,12 @@ static SWController *controller;
     NSArray *keys=@[@"data",@"wifi",@"bluetooth",@"hotspot"];
     int current[SWRadioCount],before[SWRadioCount];
     for(unsigned i=0;i<SWRadioCount;i++) {
-        current[i]=[p[keys[i]] intValue];
+        current[i]=[p[keys[i]] isKindOfClass:NSNumber.class]?[p[keys[i]] intValue]:-1;
         before[i]=[baseline[keys[i]] isKindOfClass:NSNumber.class]?[baseline[keys[i]] intValue]:-1;
     }
     SWPlan plan;
-    if (!SWBuildPlan(profile,current,baseline?before:NULL,&plan)) {
+    BOOL planned=individual?SWBuildRadioPlan(radio,desired,current,&plan):SWBuildPlan(profile,current,baseline?before:NULL,&plan);
+    if (!planned) {
         self.phase=@"error";
         self.message=self.restoring?@"Chưa có thao tác để hoàn tác.":@"Chưa lưu trạng thái trước phiên này. Hãy chọn Chỉ tắt hotspot hoặc Tắt cả bộ; lần sau bật bằng ShareWifi để lưu phiên.";
         [self publish];if(icon)SWToast(self.message);return;
@@ -259,16 +284,18 @@ static SWController *controller;
     NSMutableArray *steps=[NSMutableArray array];
     for(unsigned i=0;i<SWRadioCount;i++)target[keys[i]]=@(plan.target[i]);
     for(unsigned i=0;i<plan.count;i++)[steps addObject:keys[plan.order[i]]];
-    self.target=target;self.steps=steps;self.operation=action;
+    self.target=target;self.steps=steps;self.operation=action;self.individualKey=individualKey;
     NSDictionary *previousSession=self.sessionSnapshot;
-    if(SWCaptureSession(profile,current,self.sessionSnapshot!=nil))self.sessionSnapshot=p;
-    self.nextSessionSnapshot=self.restoring?self.undoSessionSnapshot:(profile==SWStartAll?self.sessionSnapshot:nil);
+    BOOL startSession=individual?(radio==SWHotspot && desired):profile==SWStartAll;
+    if(startSession&&SWCaptureSession(SWStartAll,current,self.sessionSnapshot!=nil))self.sessionSnapshot=p;
+    self.nextSessionSnapshot=individual?self.sessionSnapshot:(self.restoring?self.undoSessionSnapshot:(profile==SWStartAll?self.sessionSnapshot:nil));
     self.undoSessionSnapshot=previousSession;
-    self.snapshot=p;
+    self.snapshot=SWValidPowers(current)?p:nil;
     self.busy=YES;self.step=0;self.generation++;self.probeGeneration++;
     self.internet=@"Chưa kiểm tra sau thay đổi";self.verifiedAt=0;
-    self.phase=[self.target[@"hotspot"] boolValue]?@"starting":@"stopping";
-    self.message=[self.target[@"hotspot"] boolValue]?@"Đang bật chia sẻ mạng…":@"Đang tắt các kết nối…";
+    self.phase=individual?@"changing":([self.target[@"hotspot"] boolValue]?@"starting":@"stopping");
+    self.message=individual?[NSString stringWithFormat:@"Đang %@ %@…",desired?@"bật":@"tắt",SWName(individualKey)]:
+        ([self.target[@"hotspot"] boolValue]?@"Đang bật chia sẻ mạng…":@"Đang tắt các kết nối…");
     self.iconOperation=icon; if(icon)SWToast(self.message);
     [self publish]; [self nextStep];
 }
@@ -292,10 +319,11 @@ static SWController *controller;
             [self finish:NO message:@"Kết nối đã thay đổi trong lúc xử lý. Kiểm tra lại trạng thái từng mục."];return;
         }
         BOOL on=[actual[@"hotspot"] boolValue];
-        NSString *message=self.restoring?@"Đã khôi phục trạng thái trước thao tác":
+        NSString *message=self.individualKey.length?[NSString stringWithFormat:@"Đã %@ %@.",[self.target[self.individualKey] boolValue]?@"bật":@"tắt",SWName(self.individualKey)]:
+            (self.restoring?@"Đã khôi phục trạng thái trước thao tác":
             ([self.operation isEqual:@"restoreSession"]?@"Đã khôi phục trạng thái trước phiên chia sẻ":
             ([self.operation isEqual:@"hotspotOnly"]?@"Đã tắt hotspot · Giữ nguyên dữ liệu di động, Wi-Fi và Bluetooth":
-            (on?@"Đã bật cả bộ · Hotspot cho phép kết nối":@"Đã tắt hotspot, dữ liệu di động, Wi-Fi và Bluetooth")));
+            (on?@"Đã bật cả bộ · Hotspot cho phép kết nối":@"Đã tắt hotspot, dữ liệu di động, Wi-Fi và Bluetooth"))));
         [self finish:YES message:message];
         if (on) [self probe]; return;
     }
@@ -402,7 +430,9 @@ __attribute__((constructor)) static void SWInitialize(void) {
             if(method&&method_getNumberOfArguments(method)==2&&ret&&!strcmp(ret,"v")) {
                 MSHookMessageEx(iconView,tap,(IMP)SWHandleTap,(IMP *)&originalTap);controller.tapHook=originalTap!=NULL;
             }
-            free(ret);[controller publish];
+            free(ret);
+            controller.hapticHook=SWInstallHapticMenu(^{return [controller powers];},^(NSString *action){[controller request:action fromIcon:YES];});
+            [controller publish];
         });
     }
 }

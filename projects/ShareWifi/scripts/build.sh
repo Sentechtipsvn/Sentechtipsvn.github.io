@@ -13,14 +13,14 @@ module="$stage/var/jb/Library/ControlCenter/Bundles/ShareWifiModule.bundle"
 mkdir -p "$module" "$app" "$inject" "$stage/DEBIAN" "$project_dir/packages"
 common=(-target arm64-apple-ios15.0 -isysroot "$SDK_PATH" -fobjc-arc -O2
     -Wall -Wextra -Werror -fvisibility=hidden -I "$project_dir/Sources")
-clang "${common[@]}" -dynamiclib "$project_dir/Sources/Controller.m" \
+clang "${common[@]}" -dynamiclib "$project_dir/Sources/Controller.m" "$project_dir/Sources/SWHapticMenu.m" \
     "$project_dir/Sources/SWClients.m" "$project_dir/Sources/SWArp.c" \
     -framework UIKit -framework Foundation -lobjc \
     -L "$THEOS/vendor/lib/iphone/rootless" -lsubstrate \
     -Wl,-rpath,/var/jb/Library/Frameworks -Wl,-rpath,@loader_path/.jbroot/Library/Frameworks \
     -Wl,-install_name,@rpath/ShareWifi.dylib -o "$inject/ShareWifi.dylib"
 ldid -S -Cadhoc "$inject/ShareWifi.dylib"
-clang "${common[@]}" "$project_dir/App/main.m" -framework UIKit -framework Foundation -lobjc -o "$app/ShareWifi"
+clang "${common[@]}" "$project_dir/App/main.m" "$project_dir/App/SWSettings.m" -framework UIKit -framework Foundation -lobjc -o "$app/ShareWifi"
 ldid -S"$project_dir/Resources/App.entitlements" -Cadhoc "$app/ShareWifi"
 clang "${common[@]}" -bundle "$project_dir/ControlCenter/ShareWifiModule.m" \
     -I "$THEOS/vendor/include" -F "$SDK_PATH/System/Library/PrivateFrameworks" \
@@ -39,4 +39,4 @@ cp "$project_dir/LICENSE" "$doc/copyright"
 find "$stage" -type d -exec chmod 755 {} +
 find "$stage" -type f -exec chmod 644 {} +
 chmod 755 "$module/ShareWifiModule" "$app/ShareWifi" "$inject/ShareWifi.dylib" "$stage/DEBIAN/postinst" "$stage/DEBIAN/prerm"
-dpkg-deb --root-owner-group -Zxz -z9 --build "$stage" "$project_dir/packages/ShareWifi-0.2.0-beta1-iphoneos-arm64.deb"
+dpkg-deb --root-owner-group -Zxz -z9 --build "$stage" "$project_dir/packages/ShareWifi-0.2.1-beta1-iphoneos-arm64.deb"

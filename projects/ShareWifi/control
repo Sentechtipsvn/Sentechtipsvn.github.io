@@ -1,8 +1,8 @@
 Package: vn.sentechtips.sharewifi
 Name: ShareWifi
-Version: 0.2.0~beta1
+Version: 0.2.1~beta1
 Architecture: iphoneos-arm64
-Description: One-tap cellular hotspot controller and local client panel for iPhone 7 Plus on iOS 15.8.8. Experimental; physical device validation required.
+Description: Individual radio switches, Home Screen Haptic Touch and one-tap cellular hotspot controller for iPhone 7 Plus on iOS 15.8.8. Experimental; physical device validation required.
 Maintainer: Sentechtipsvn
 Author: Sentechtipsvn
 Section: Utilities

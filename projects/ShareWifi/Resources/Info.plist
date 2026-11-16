@@ -1,24 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0"><dict>
-<key>CFBundleIdentifier</key><string>vn.sentechtips.sharewifi</string>
-<key>CFBundleExecutable</key><string>ShareWifi</string>
-<key>CFBundleName</key><string>ShareWifi</string>
-<key>CFBundleDisplayName</key><string>ShareWifi</string>
-<key>CFBundlePackageType</key><string>APPL</string>
-<key>CFBundleShortVersionString</key><string>0.2.0</string>
-<key>CFBundleVersion</key><string>3</string>
-<key>LSRequiresIPhoneOS</key><true/>
-<key>MinimumOSVersion</key><string>15.0</string>
-<key>UIDeviceFamily</key><array><integer>1</integer></array>
-<key>UIRequiredDeviceCapabilities</key><array><string>arm64</string></array>
-<key>UISupportedInterfaceOrientations</key><array><string>UIInterfaceOrientationPortrait</string><string>UIInterfaceOrientationLandscapeLeft</string><string>UIInterfaceOrientationLandscapeRight</string></array>
-<key>UILaunchScreen</key><dict/>
-<key>CFBundleIcons</key><dict><key>CFBundlePrimaryIcon</key><dict><key>CFBundleIconFiles</key><array><string>AppIcon60x60</string></array><key>UIPrerenderedIcon</key><true/></dict></dict>
-<key>UIApplicationShortcutItems</key><array>
-<dict><key>UIApplicationShortcutItemType</key><string>panel</string><key>UIApplicationShortcutItemTitle</key><string>Bảng điều khiển</string><key>UIApplicationShortcutItemIconType</key><string>UIApplicationShortcutIconTypeHome</string></dict>
-<dict><key>UIApplicationShortcutItemType</key><string>devices</string><key>UIApplicationShortcutItemTitle</key><string>Thiết bị kết nối</string><key>UIApplicationShortcutItemIconType</key><string>UIApplicationShortcutIconTypeContact</string></dict>
-<dict><key>UIApplicationShortcutItemType</key><string>on</string><key>UIApplicationShortcutItemTitle</key><string>Bật chia sẻ mạng</string><key>UIApplicationShortcutItemIconType</key><string>UIApplicationShortcutIconTypeAdd</string></dict>
-<dict><key>UIApplicationShortcutItemType</key><string>off</string><key>UIApplicationShortcutItemTitle</key><string>Tắt cả bộ kết nối</string><key>UIApplicationShortcutItemIconType</key><string>UIApplicationShortcutIconTypeProhibit</string></dict>
-</array>
-</dict></plist>
+<plist version="1.0">
+<dict>
+	<key>CFBundleIdentifier</key>
+	<string>vn.sentechtips.sharewifi</string>
+	<key>CFBundleExecutable</key>
+	<string>ShareWifi</string>
+	<key>CFBundleName</key>
+	<string>ShareWifi</string>
+	<key>CFBundleDisplayName</key>
+	<string>ShareWifi</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>0.2.1</string>
+	<key>CFBundleVersion</key>
+	<string>4</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>MinimumOSVersion</key>
+	<string>15.0</string>
+	<key>UIDeviceFamily</key>
+	<array>
+		<integer>1</integer>
+	</array>
+	<key>UIRequiredDeviceCapabilities</key>
+	<array>
+		<string>arm64</string>
+	</array>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UILaunchScreen</key>
+	<dict/>
+	<key>CFBundleIcons</key>
+	<dict>
+		<key>CFBundlePrimaryIcon</key>
+		<dict>
+			<key>CFBundleIconFiles</key>
+			<array>
+				<string>AppIcon60x60</string>
+			</array>
+			<key>UIPrerenderedIcon</key>
+			<true/>
+		</dict>
+	</dict>
+	<key>UIApplicationShortcutItems</key>
+	<array>
+		<dict>
+			<key>UIApplicationShortcutItemType</key>
+			<string>panel</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Bảng điều khiển</string>
+			<key>UIApplicationShortcutItemIconType</key>
+			<string>UIApplicationShortcutIconTypeHome</string>
+		</dict>
+		<dict>
+			<key>UIApplicationShortcutItemType</key>
+			<string>devices</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Thiết bị kết nối</string>
+			<key>UIApplicationShortcutItemIconType</key>
+			<string>UIApplicationShortcutIconTypeContact</string>
+		</dict>
+		<dict>
+			<key>UIApplicationShortcutItemType</key>
+			<string>on</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Bật chia sẻ mạng</string>
+			<key>UIApplicationShortcutItemIconType</key>
+			<string>UIApplicationShortcutIconTypeAdd</string>
+		</dict>
+		<dict>
+			<key>UIApplicationShortcutItemType</key>
+			<string>off</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Tắt cả bộ kết nối</string>
+			<key>UIApplicationShortcutItemIconType</key>
+			<string>UIApplicationShortcutIconTypeProhibit</string>
+		</dict>
+	</array>
+</dict>
+</plist>
