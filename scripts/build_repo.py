@@ -13,7 +13,7 @@ import subprocess
 from urllib.parse import quote, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
-SITE = ROOT / 'repo'
+SITE = ROOT
 
 
 def parse_control(text):
@@ -56,7 +56,7 @@ def main():
         raise ValueError('Duplicate package ID in catalog')
     actual = list((SITE / 'debs').glob('*.deb'))
     if {p.name for p in actual} != {e['file'] for e in entries}:
-        raise ValueError('Deb files and catalog differ; archive retired builds outside repo/debs')
+        raise ValueError('Deb files and catalog differ; archive retired builds outside debs')
     scanned = run('dpkg-scanpackages', '--multiversion', 'debs', cwd=SITE)
     paragraphs = []
     public = []

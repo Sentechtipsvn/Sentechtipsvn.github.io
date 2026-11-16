@@ -30,20 +30,20 @@ Repo này nhận các cập nhật tiếp theo của nguồn. Nguồn cũ không
 
 ## Cấu trúc
 
-- `repo/`: dữ liệu website và nguồn APT được GitHub Pages phục vụ tại địa chỉ gốc.
-- `repo/debs/`: ba gói hiện tại. `Packages`, bản nén gzip/bzip2/xz và `Release` được sinh từ chính dữ liệu .deb.
-- `repo/depictions/`: giới thiệu native trong Sileo. Trang web giữ giao diện gọn; chi tiết kiểm thử nằm trong Sileo và hướng dẫn từng dự án.
+- `index.html`, `Release`, `Packages*`, `CydiaIcon.png`: website và chỉ mục APT đặt ngay tại thư mục gốc, cùng nơi GitHub Pages phục vụ.
+- `debs/`: ba gói hiện tại. `Packages`, bản nén gzip/bzip2/xz và `Release` được sinh từ chính dữ liệu .deb.
+- `depictions/`: giới thiệu native trong Sileo. Trang web giữ giao diện gọn; chi tiết kiểm thử nằm trong Sileo và hướng dẫn từng dự án.
 - `projects/`: mã nguồn, hướng dẫn và bộ kiểm tra của từng tweak.
 - `sources/`: ZIP mã nguồn của các bản đang phân phối.
 - `archive/`: các bản ShareWifi 0.1.0/0.1.1 và ZIP nguồn để lưu lịch sử.
 - `catalog.json`: mô tả, version, changelog và trạng thái kiểm thử của ba tweak.
 - `scripts/`: bộ tạo nguồn và các kiểm tra APT/Sileo.
-- `.github/workflows/publish.yml`: kiểm tra rồi xuất bản Pages sau mỗi lần push lên master. Bước triển khai phải thành công mới xem là đã xuất bản.
+- `.github/workflows/publish.yml`: kiểm tra dữ liệu đã commit bằng parser Sileo và APT. GitHub Pages tự triển khai nhánh master; không chạy thêm workflow deploy cạnh tranh với Pages.
 
 ## Cập nhật gói
 
 1. Build tweak với version mới; giữ bản cũ trong `archive/` nếu cần. Không thay byte một .deb đã phát hành mà vẫn giữ nguyên version.
-2. Cập nhật `projects/`, ZIP trong `sources/`, .deb trong `repo/debs/` và thông tin tương ứng ở `catalog.json`.
+2. Cập nhật `projects/`, ZIP trong `sources/`, .deb trong `debs/` và thông tin tương ứng ở `catalog.json`.
 3. Chạy:
 
 ```sh
@@ -53,15 +53,15 @@ python3 scripts/verify_sileo.py
 bash scripts/verify_apt.sh
 ```
 
-4. Commit các dữ liệu mới cùng chỉ mục đã sinh, rồi push. GitHub Actions kiểm tra lại và xuất bản thư mục `repo/` lên Pages.
+4. Commit dữ liệu mới cùng chỉ mục đã sinh, rồi push. GitHub Pages triển khai thư mục gốc của nhánh master. Workflow kiểm tra dữ liệu đã commit; kiểm tra URL công khai sau khi Pages triển khai xong.
 
 Công cụ tạo nguồn cần Python 3 và `dpkg-scanpackages` (`dpkg-dev` trên Debian/Ubuntu). Kiểm tra parser C cần clang hỗ trợ Blocks; thử đọc APT cần apt-get/apt-cache. Mỗi tweak có môi trường build riêng trong README của dự án.
 
 ## Cấu hình Pages một lần
 
-Repo có tên đặc biệt `Sentechtipsvn.github.io`, thuộc tài khoản `Sentechtipsvn`. Trong **Settings → Pages**, chọn **Source: GitHub Actions**. Nếu mới bật Source sau khi workflow đã chạy, vào **Actions → Publish Sileo repository → Run workflow** để xuất bản lại.
+Repo có tên đặc biệt `Sentechtipsvn.github.io`, thuộc tài khoản `Sentechtipsvn`. Cấu hình hiện dùng trong **Settings → Pages**: **Deploy from a branch → master → / (root)**. Giữ cấu hình này; dữ liệu nguồn đã nằm ngay tại gốc và có `.nojekyll`.
 
-Quy trình xác nhận đúng địa chỉ `https://sentechtipsvn.github.io/` và không báo triển khai thành công khi bước Deploy Pages chưa chạy được.
+Địa chỉ là `https://sentechtipsvn.github.io/`. Tách kiểm tra dữ liệu khỏi việc triển khai của Pages để tránh hai workflow ghi đè lẫn nhau. Workflow kiểm tra xanh chưa thay cho kiểm tra HTTP của website, Release, Packages và các gói tải xuống.
 
 ## Kiểm tra tương thích nguồn
 

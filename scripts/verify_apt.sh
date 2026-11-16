@@ -6,7 +6,7 @@ check_dir="$(mktemp -d)"
 trap 'rm -rf "$check_dir"' EXIT
 chmod 755 "$check_dir"
 mkdir -p "$check_dir/lists/partial" "$check_dir/cache/archives/partial"
-printf 'deb [trusted=yes arch=iphoneos-arm64] file:%s/repo ./\n' "$project_dir" > "$check_dir/sources.list"
+printf 'deb [trusted=yes arch=iphoneos-arm64] file:%s ./\n' "$project_dir" > "$check_dir/sources.list"
 options=(-o "Dir::Etc::sourcelist=$check_dir/sources.list" -o Dir::Etc::sourceparts=-
     -o "Dir::State::lists=$check_dir/lists" -o "Dir::Cache=$check_dir/cache"
     -o Dir::Etc::parts=- -o Dir::Etc::main=- -o APT::Architecture=iphoneos-arm64 -o Debug::NoLocking=1 -o APT::Get::List-Cleanup=0)
